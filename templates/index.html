@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<head>
+  <title>OpenAI Light Q&A Demo</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='QnA.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+
+  <script>
+    function init() {
+      document.getElementById("question-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const resultElement = document.getElementById("result");
+
+        // Send the form data as a POST request to the Flask route
+        fetch("{{ url_for('index') }}", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json()) // Parse the response as JSON
+          .then((data) => {
+            // Update the result element with the response data
+            resultElement.innerHTML = data.result;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='QnA.png') }}" class="icon" />
+  <h3>Ask me a question:</h3>
+  <form id="question-form" method="post">
+    <input type="text" name="question" placeholder="Enter a question" required />
+    <input type="submit" value="Generate answer" />
+    <label>
+      <input type="checkbox" name="long_answer" />
+      Long answer
+    </label>
+  </form>
+  <div id="result" class="result-text">
+    {% if result %}
+    {{ result }}
+    {% endif %}
+  </div>
+</body>
+
+</html>
