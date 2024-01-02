@@ -38,6 +38,10 @@
   <img src="{{ url_for('static', filename='QnA.png') }}" class="icon" />
   <h3>Ask me a question:</h3>
   <form id="question-form" method="post">
+    <!-- Display error message if it exists -->
+    {% if error %}
+          <div class="error-message">{{ error }}</div>
+    {% endif %}
     <input type="text" name="question" placeholder="Enter a question" required />
     <input type="submit" value="Generate answer" />
     <label>

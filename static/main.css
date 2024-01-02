@@ -72,4 +72,15 @@ input[type="submit"] {
   word-wrap: break-word; /* Allow long words to break onto the next line */
   white-space: pre-wrap; /* Preserve line breaks and spaces in the text */
 }
+.error-message {
+    color: #ff0033; /* Red color for visibility */
+    background-color: #ffe6e6; /* Light red background */
+    border: 1px solid #ff3333; /* Red border for emphasis */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
 
