@@ -34,7 +34,7 @@ def index():
         question = request.form["question"]
         long_answer = request.form.get("long_answer")
         response = openai.Completion.create(
-            model="text-davinci-003",
+            model="gpt-3.5-turbo-instruct",
             prompt=generate_prompt(question, long_answer),
             temperature=0.6,
             max_tokens=250,
